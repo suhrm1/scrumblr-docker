@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+
+  scrumblr:
+    image: local/scrumblr
+    build: .
+    ports:
+      - 80:80
+    environment:
+      SCRUMBLR_PORT: 80
+      REDIS_HOST: redis
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:6.0.9
+    volumes:
+      - redis_data:/data
+    
+volumes:
+  redis_data:
